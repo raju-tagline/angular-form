@@ -1,15 +1,24 @@
 <div class="row justify-content-center pt-5">
     <div class="col-sm-6 bg-secondary p-3 rounded shadow">
-        <form action="">
-            <div class="forms-group">
+        <form (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
+            <div class="form-group">
                 <label for="userName" class="text-white">Username</label>
-                <input type="text" class="form-control" id="userName" />
+                <input type="text" class="form-control" id="userName" name="username" required minlength="3"
+                    #username="ngModel" ngModel>
+                <div *ngIf="!username.valid && username.touched">
+                    <p class="text-white">Enter valid Username</p>
+                </div>
             </div>
             <div class="forms-group mt-2">
                 <label for="password" class="text-white">Password</label>
-                <input type="password" id="password" class="form-control" />
+                <input type="password" id="password" name="password" class="form-control" required #passwprd="ngModel"
+                    pattern="^(?=[^A-Z\n]*[A-Z])(?=[^a-z\n]*[a-z])(?=[^0-9\n]*[0-9])(?=[^#?!@$%^&*\n-]*[#?!@$%^&*-]).{8,}$"
+                    ngModel>
+                <div *ngIf="!passwprd.valid && passwprd.touched">
+                    <p class="text-white">Please enter Password!</p>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary col-sm-4 mt-3">Login</button>
+            <button type="submit" class="btn btn-primary col-sm-4 mt-3" [disabled]="!myForm.valid">Submit</button>
         </form>
     </div>
 </div>
