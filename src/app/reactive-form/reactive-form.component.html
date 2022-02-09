@@ -1,1 +1,51 @@
-<p>reactive-form works!</p>
+<div class="row justify-content-center pt-5">
+    <div class="col-sm-6 bg-secondary p-3 rounded shadow">
+        <form #myForm="ngForm">
+            <div class="form-group">
+                <label for="userName" class="text-white">Name</label>
+                <input type="text" class="form-control" id="userName" name="username">
+            </div>
+            <div class="forms-group mt-2">
+                <label for="password" class="text-white">Email</label>
+                <input type="text" id="pass" name="email" class="form-control">
+            </div>
+            <div class="forms-group mt-2">
+                <input type="radio" id="male" name="gender">&nbsp;
+                <label for="male" class="text-white">Male</label>&nbsp;
+                <input type="radio" id="female" name="gender">&nbsp;
+                <label for="female" class="text-white">Female</label>
+            </div>
+            <div class="forms-group mt-2">
+                <label for="password" class="text-white">Country</label>
+                <select name="" id="" class="form-control">
+                    <option value=""></option>
+                    <option value="India">India</option>
+                    <option value="Uk">Uk</option>
+                    <option value="Canada">Canada</option>
+                    <option value="UAE">UAE</option>
+                </select>
+            </div>
+            <div class="forms-group mt-2">
+                <label for="password" class="text-white">State</label>
+                <select name="" id="" class="form-control">
+                    <option value=""></option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="MP">MP</option>
+                    <option value="panjab">panjab</option>
+                    <option value="UP">UP</option>
+                </select>
+            </div>
+            <div class="forms-group mt-2">
+                <label for="password" class="text-white">City</label>
+                <select name="" id="" class="form-control">
+                    <option value=""></option>
+                    <option value="Surat">Surat</option>
+                    <option value="Bhuj">Bhuj</option>
+                    <option value="Dwarka">Dwarka</option>
+                    <option value="Vadodara">Vadodara</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary col-sm-4 mt-3">Submit</button>
+        </form>
+    </div>
+</div>
