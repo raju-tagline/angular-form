@@ -1,33 +1,74 @@
 <div class="row justify-content-center pt-5">
     <div class="col-sm-6 bg-secondary p-3 rounded shadow">
-        <form #myForm="ngForm">
+        <form [formGroup]="myRegistrationForm" (ngSubmit)="onSubmit()">
+
+            <!-- Name -->
             <div class="form-group">
                 <label for="userName" class="text-white">Name</label>
-                <input type="text" class="form-control" id="userName" name="username">
+                <input type="text" class="form-control" id="userName" formControlName="name" [ngClass]="myRegistrationForm.get('name')?.valid ? 'valid' : 'invalid' && 
+                myRegistrationForm.get('name')?.touched ? 'invalid' : 'valid' && 
+                myRegistrationForm.get('name')?.pristine ? '' : ''">
             </div>
+
+            <!-- Email -->
             <div class="forms-group mt-2">
                 <label for="password" class="text-white">Email</label>
-                <input type="text" id="pass" name="email" class="form-control">
+                <input type="text" id="pass" formControlName="email" class="form-control" [ngClass]="myRegistrationForm.get('email')?.valid ? 'valid' : 'invalid' && 
+                myRegistrationForm.get('email')?.touched ? 'invalid' : 'valid' && 
+                myRegistrationForm.get('email')?.pristine ? '' : ''">
+                <small class="text-info"
+                    *ngIf="!myRegistrationForm.get('email')?.valid && myRegistrationForm.get('email')?.touched">Please
+                    enter
+                    valid Email!</small>
             </div>
-            <div class="forms-group mt-2">
-                <input type="radio" id="male" name="gender">&nbsp;
-                <label for="male" class="text-white">Male</label>&nbsp;
-                <input type="radio" id="female" name="gender">&nbsp;
-                <label for="female" class="text-white">Female</label>
+
+            <!-- Gender -->
+            <div class="forms-group mt-2" *ngFor="let gender of genders">
+                <input type="radio" id="{{ gender.id }}" formControlName="gender" value="{{ gender.genderType }}"
+                    [ngClass]="myRegistrationForm.get('gender')?.valid ? 
+                (myRegistrationForm.get('gender')?.value === gender.genderType) ?  'valid' : '' : 'invalid' && 
+                myRegistrationForm.get('gender')?.touched ? 'invalid' : 'valid' && 
+                myRegistrationForm.get('gender')?.pristine ? '' : ''">&nbsp;
+                <label for="{{ gender.id }}" class="text-white">{{ gender.genderType }}</label>
             </div>
+
+            <!-- Hobby -->
+            <!-- <div class="forms-group mt-2" *ngFor="let hobby of hobbys">
+                <input type="checkbox" id="{{ hobby }}" formControlName="hobby" value="{{ hobby }}" [ngClass]="myRegistrationForm.get('hobby')?.valid  ? 
+                (myRegistrationForm.get('hobby')?.value === hobbys ) ?  'valid' : '' : 'invalid' && 
+                myRegistrationForm.get('hobby')?.touched ? 'invalid' : 'valid' && 
+                myRegistrationForm.get('hobby')?.pristine ? '' : ''">&nbsp;
+                <label for="{{ hobby }}" class="text-white">{{ hobby }}</label>
+            </div> -->
+            <!-- hobbies -->
+            <div *ngFor="let data of Data; let i=index" class="text-white">
+                <label>
+                    <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
+                    {{data.name}}
+                </label>
+            </div>
+            <p class="text-warning" *ngIf="this.myRegistrationForm.controls['checkArray'].errors?.['required']">
+                Checkbox is required, select atleast one value.
+            </p>
+            <!-- Country -->
             <div class="forms-group mt-2">
                 <label for="password" class="text-white">Country</label>
-                <select name="" id="" class="form-control">
-                    <option value=""></option>
+                <select formControlName="country" id="" class="form-control" [ngClass]="myRegistrationForm.get('country')?.valid ? 'valid' : 'invalid' && 
+                myRegistrationForm.get('country')?.touched ? 'invalid' : 'valid' &&
+                myRegistrationForm.get('country')?.pristine ? '' : ''">
                     <option value="India">India</option>
                     <option value="Uk">Uk</option>
                     <option value="Canada">Canada</option>
                     <option value="UAE">UAE</option>
                 </select>
             </div>
+
+            <!-- State -->
             <div class="forms-group mt-2">
                 <label for="password" class="text-white">State</label>
-                <select name="" id="" class="form-control">
+                <select formControlName="state" id="" class="form-control" [ngClass]="myRegistrationForm.get('state')?.valid ? 'valid' : 'invalid' && 
+                myRegistrationForm.get('state')?.touched ? 'invalid' : 'valid' &&
+                myRegistrationForm.get('state')?.pristine ? '' : ''">
                     <option value=""></option>
                     <option value="Gujarat">Gujarat</option>
                     <option value="MP">MP</option>
@@ -35,9 +76,13 @@
                     <option value="UP">UP</option>
                 </select>
             </div>
+
+            <!-- City -->
             <div class="forms-group mt-2">
                 <label for="password" class="text-white">City</label>
-                <select name="" id="" class="form-control">
+                <select formControlName="city" id="" class="form-control" [ngClass]="myRegistrationForm.get('city')?.valid ? 'valid' : 'invalid' && 
+                myRegistrationForm.get('city')?.touched ? 'invalid' : 'valid' &&
+                myRegistrationForm.get('city')?.pristine ? '' : ''">
                     <option value=""></option>
                     <option value="Surat">Surat</option>
                     <option value="Bhuj">Bhuj</option>
@@ -45,7 +90,20 @@
                     <option value="Vadodara">Vadodara</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary col-sm-4 mt-3">Submit</button>
+            <button type="submit" class="btn btn-primary col-sm-4 mt-3"
+                [disabled]="!myRegistrationForm.valid ">Submit</button>
         </form>
     </div>
+    <hr>
+    <div class="text-black text-center" *ngIf="submit">
+        <h4> Name :≈</h4>
+        <h4> Email :≈ </h4>
+        <h4> Gender :</h4>
+        <h4> Country :≈ </h4>
+        <h4> State :≈ </h4>
+        <h4> City :≈≈</h4>
+        <h4> City :≈≈ {{ formValue | json }} </h4>
+
+    </div>
 </div>
+
