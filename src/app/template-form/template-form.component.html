@@ -11,14 +11,21 @@
             </div>
             <div class="forms-group mt-2">
                 <label for="password" class="text-white">Password</label>
-                <input type="password" id="password" name="password" class="form-control" required #passwprd="ngModel"
+                <input type="password" id="password" name="password" class="form-control" required #password="ngModel"
                     pattern="^(?=[^A-Z\n]*[A-Z])(?=[^a-z\n]*[a-z])(?=[^0-9\n]*[0-9])(?=[^#?!@$%^&*\n-]*[#?!@$%^&*-]).{8,}$"
                     ngModel>
-                <div *ngIf="!passwprd.valid && passwprd.touched">
+                <div *ngIf="!password.valid && password.touched">
                     <p class="text-white">Please enter Password!</p>
+                    <p class="text-white">"abcA1#!A"<br>"#!asdfSFD1;"</p>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary col-sm-4 mt-3" [disabled]="!myForm.valid">Submit</button>
         </form>
+    </div>
+    <div class="row">
+        <div class="col-sm-5" *ngIf="submit">
+            <p>UserName: {{ username.value }}</p>
+            <p>Password: {{ password.value }}</p>
+        </div>
     </div>
 </div>
