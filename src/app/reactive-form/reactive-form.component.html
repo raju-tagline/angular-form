@@ -16,13 +16,10 @@
                 <input type="text" id="pass" formControlName="email" class="form-control" [ngClass]="myRegistrationForm.get('email')?.valid ? 'valid' : 'invalid' && 
                 myRegistrationForm.get('email')?.touched ? 'invalid' : 'valid' && 
                 myRegistrationForm.get('email')?.pristine ? '' : ''">
-                <!-- <small class="text-info"
-                    *ngIf="!myRegistrationForm.get('email')?.valid && myRegistrationForm.get('email')?.touched ">Please
-                    enter
-                    valid Email!</small> -->
-
                 <div *ngIf="!myRegistrationForm.get('email')?.valid" class="text-info">
-                    <div *ngIf="myRegistrationForm.get('email')?.errors?.['email'] && myRegistrationForm.get('email')?.touched">Please enter valid email</div>
+                    <div
+                        *ngIf="myRegistrationForm.get('email')?.errors?.['email'] && myRegistrationForm.get('email')?.touched">
+                        Please enter valid email</div>
                     <div *ngIf="myRegistrationForm.get('email')?.errors?.['noWhiteSpace']">Whitespace is not allowed
                     </div>
                 </div>
@@ -38,23 +35,15 @@
                 <label for="{{ gender.id }}" class="text-white">{{ gender.genderType }}</label>
             </div>
 
-            <!-- Hobby -->
-            <!-- <div class="forms-group mt-2" *ngFor="let hobby of hobbys">
-                <input type="checkbox" id="{{ hobby }}" formControlName="hobby" value="{{ hobby }}" [ngClass]="myRegistrationForm.get('hobby')?.valid  ? 
-                (myRegistrationForm.get('hobby')?.value === hobbys ) ?  'valid' : '' : 'invalid' && 
-                myRegistrationForm.get('hobby')?.touched ? 'invalid' : 'valid' && 
-                myRegistrationForm.get('hobby')?.pristine ? '' : ''">&nbsp;
-                <label for="{{ hobby }}" class="text-white">{{ hobby }}</label>
-            </div> -->
-
             <!-- hobbies -->
-            <div class="forms-group mt-2 text-white" *ngFor="let hobby of hobbys;let i=index">
-                <label>
-                    <input type="checkbox" [value]="hobby.value" (change)="onCheckboxChange($event)" />
-                    {{hobby.name}}
-                </label>
+            <div class="forms-group mt-2 text-white">
+                {{ favFruit }}
             </div>
-            <p class="text-warning" *ngIf="this.myRegistrationForm.controls['checkArray'].errors?.['required']">
+            <div class="forms-group mt-2 text-white" *ngFor="let fruit of fruitsArr;let i=index">
+                <input type="checkbox" value="{{ fruit.value }}" formControlName="fruits" (change)="onCheckboxChange($event)" />&nbsp;
+                <label>{{fruit.name}}</label>
+            </div>
+            <p class="text-warning" *ngIf="this.myRegistrationForm.controls['fruits'].errors?.['required']">
                 Checkbox is required, select atleast one value.
             </p>
 
@@ -105,13 +94,6 @@
     </div>
     <hr>
     <div class="text-black text-center" *ngIf="submit">
-        <!-- <h4> Name :≈</h4>
-        <h4> Email :≈ </h4>
-        <h4> Gender :</h4>
-        <h4> Country :≈ </h4>
-        <h4> State :≈ </h4>
-        <h4> City :≈≈</h4> -->
         <h4> Form Data :≈≈ {{ formValue | json }} </h4>
-
     </div>
 </div>

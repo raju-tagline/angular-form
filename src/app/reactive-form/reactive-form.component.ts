@@ -1,9 +1,8 @@
+import { Gender, Fruit } from './../interface';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  EmailValidator,
   FormArray,
-  FormBuilder,
   FormControl,
   FormGroup,
   ValidationErrors,
@@ -17,31 +16,25 @@ import {
 })
 export class ReactiveFormComponent implements OnInit {
   public myRegistrationForm!: FormGroup;
-  public submit = false;
-  public formValue = '';
-  public genders = [
-    {
-      id: 1,
-      genderType: 'Male',
-    },
-    {
-      id: 2,
-      genderType: 'Female',
-    },
+  public submit: boolean = false;
+  public favFruit:String = "Select your Favorite : ";
+  public formValue: String = '';
+
+  public genders: Gender[] = [
+    { id: 1, genderType: 'Male' },
+    { id: 2, genderType: 'Female' },
   ];
 
-  public hobbys: Array<any> = [
-    { name: 'Pear', value: 'pear' },
-    { name: 'Plum', value: 'plum' },
-    { name: 'Kiwi', value: 'kiwi' },
-    { name: 'Apple', value: 'apple' },
-    { name: 'Lime', value: 'lime' },
+  public fruitsArr: Fruit[] = [
+    { name: 'Pear', value: 'Pear' },
+    { name: 'Plum', value: 'Plum' },
+    { name: 'Kiwi', value: 'Kiwi' },
+    { name: 'Apple', value: 'Apple' },
+    { name: 'Lime', value: 'Lime' },
     { name: 'Other', value: 'Other' },
   ];
 
-  // public hobbys: string[] = ['Reading', 'Swimming', 'Cricket', 'Tv'];
-
-  // constructor() {}
+  constructor() {}
 
   ngOnInit(): void {
     this.myRegistrationForm = new FormGroup({
@@ -52,53 +45,28 @@ export class ReactiveFormComponent implements OnInit {
       email: new FormControl('test@test.test', [
         Validators.required,
         Validators.email,
-        this.noWhiteSpace
       ]),
       gender: new FormControl('Male', Validators.required),
       country: new FormControl('India', Validators.required),
       state: new FormControl('Gujarat', Validators.required),
       city: new FormControl('Surat', Validators.required),
-      checkArray: new FormArray([], [Validators.required]),
+      fruits: new FormArray([], [Validators.required]),
     });
   }
 
-  public onSubmit() {
-    this.submit = !this.submit;
-
-    console.log(
-      'this.myRegistrationForm.value :>> ',
-      this.myRegistrationForm.value
-    );
-
-    const { city, country, email, gender, checkArray, name, state } =
-      this.myRegistrationForm.value;
-
-    // this.name = name;
-    // this.email = email;
-    // this.gen = gender;
-    // this.country = country;
-    // this.state = state;
-    // this.city = city;
-
-    this.formValue = this.myRegistrationForm.value;
-
-    // console.log('this.myRegistrationForm :>> ', this.myRegistrationForm.value);
-    this.myRegistrationForm.reset();
-  }
-
   //checkbox validation
-  onCheckboxChange(e: any) {
-    const checkArray: FormArray = this.myRegistrationForm.get(
-      'checkArray'
+  public onCheckboxChange(check: any): void {
+    const fruits: FormArray = this.myRegistrationForm.get(
+      'fruits'
     ) as FormArray;
-    if (e.target.checked) {
-      checkArray.push(new FormControl(e.target.value));
+    if (check.target.checked) {
+      fruits.push(new FormControl(check.target.value));
     } else {
       let i: number = 0;
-      checkArray.controls.forEach((item) => {
-        if (item.value == e.target.value) {
-          checkArray.removeAt(i);
-          return;
+      fruits.controls.forEach((item) => {
+        if (item.value == check.target.value) {
+          fruits.removeAt(i);
+          return ;
         }
         i++;
       });
@@ -106,10 +74,26 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   //no white spaces
-  public noWhiteSpace(control: AbstractControl) : ValidationErrors | null {
-    if((control.value as string).indexOf(' ') >= 0){
-        return {noWhiteSpace: true}
+  public noWhiteSpace(control: AbstractControl): ValidationErrors | null {
+    if ((control.value as string).indexOf(' ') >= 0) {
+      return { noWhiteSpace: true };
     }
     return null;
-}
+  }
+
+  //submit
+  public onSubmit(): void {
+    this.submit = !this.submit;
+
+    const { city, country, email, gender, fruits, name, state } =
+      this.myRegistrationForm.value;
+
+    this.formValue = this.myRegistrationForm.value;
+    this.onReset();
+  }
+
+  //reset form
+  public onReset(): void {
+    this.myRegistrationForm.reset();
+  }
 }
