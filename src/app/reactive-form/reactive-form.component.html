@@ -16,10 +16,16 @@
                 <input type="text" id="pass" formControlName="email" class="form-control" [ngClass]="myRegistrationForm.get('email')?.valid ? 'valid' : 'invalid' && 
                 myRegistrationForm.get('email')?.touched ? 'invalid' : 'valid' && 
                 myRegistrationForm.get('email')?.pristine ? '' : ''">
-                <small class="text-info"
-                    *ngIf="!myRegistrationForm.get('email')?.valid && myRegistrationForm.get('email')?.touched">Please
+                <!-- <small class="text-info"
+                    *ngIf="!myRegistrationForm.get('email')?.valid && myRegistrationForm.get('email')?.touched ">Please
                     enter
-                    valid Email!</small>
+                    valid Email!</small> -->
+
+                <div *ngIf="!myRegistrationForm.get('email')?.valid" class="text-info">
+                    <div *ngIf="myRegistrationForm.get('email')?.errors?.['email'] && myRegistrationForm.get('email')?.touched">Please enter valid email</div>
+                    <div *ngIf="myRegistrationForm.get('email')?.errors?.['noWhiteSpace']">Whitespace is not allowed
+                    </div>
+                </div>
             </div>
 
             <!-- Gender -->
@@ -40,16 +46,18 @@
                 myRegistrationForm.get('hobby')?.pristine ? '' : ''">&nbsp;
                 <label for="{{ hobby }}" class="text-white">{{ hobby }}</label>
             </div> -->
+
             <!-- hobbies -->
-            <div *ngFor="let data of Data; let i=index" class="text-white">
+            <div class="forms-group mt-2 text-white" *ngFor="let hobby of hobbys;let i=index">
                 <label>
-                    <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
-                    {{data.name}}
+                    <input type="checkbox" [value]="hobby.value" (change)="onCheckboxChange($event)" />
+                    {{hobby.name}}
                 </label>
             </div>
             <p class="text-warning" *ngIf="this.myRegistrationForm.controls['checkArray'].errors?.['required']">
                 Checkbox is required, select atleast one value.
             </p>
+
             <!-- Country -->
             <div class="forms-group mt-2">
                 <label for="password" class="text-white">Country</label>
@@ -90,20 +98,20 @@
                     <option value="Vadodara">Vadodara</option>
                 </select>
             </div>
+
             <button type="submit" class="btn btn-primary col-sm-4 mt-3"
                 [disabled]="!myRegistrationForm.valid ">Submit</button>
         </form>
     </div>
     <hr>
     <div class="text-black text-center" *ngIf="submit">
-        <h4> Name :≈</h4>
+        <!-- <h4> Name :≈</h4>
         <h4> Email :≈ </h4>
         <h4> Gender :</h4>
         <h4> Country :≈ </h4>
         <h4> State :≈ </h4>
-        <h4> City :≈≈</h4>
-        <h4> City :≈≈ {{ formValue | json }} </h4>
+        <h4> City :≈≈</h4> -->
+        <h4> Form Data :≈≈ {{ formValue | json }} </h4>
 
     </div>
 </div>
-
