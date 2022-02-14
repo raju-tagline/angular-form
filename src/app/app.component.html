@@ -1,2 +1,6 @@
-
+<p>Full :-{{ currentTime }}</p>
+<p>Date :-{{ currentTime | date : 'dd/MM/yyyy' }}</p>
+<p>IST:-{{ currentTime | date : 'short':'IST' }}</p>
+<p>PST:-{{ currentTime | date : 'short':'PST' }}</p>
+<p>UTC:-{{ currentTime | date : 'short':'UTC' }}</p>
 <router-outlet></router-outlet>
