@@ -3,4 +3,11 @@
 <p>IST:-{{ currentTime | date : 'short':'IST' }}</p>
 <p>PST:-{{ currentTime | date : 'short':'PST' }}</p>
 <p>UTC:-{{ currentTime | date : 'short':'UTC' }}</p>
+<p>Currency Pipe</p>
+<p>Rupee Symbol :-{{ 1000 | currency:'INR':'symbol' }}</p>
+<p>Rupee Code :-{{ 1000 | currency:'INR':  'code' }}</p>
+<p>Rupee Narrow:- {{ 1000 | currency:'INR':'symbol-narrow'  }}</p>
+<p>Dollar symbol:- {{ 100 | currency:'USD':'symbol'  }}</p>
+<p>Dollar Code:- {{ 100 | currency:'USD':'code'  }}</p>
+<p>Dollar Narrow:- {{ 100 | currency:'USD':'symbol-narrow'  }}</p>
 <router-outlet></router-outlet>
