@@ -17,7 +17,7 @@ import {
 export class ReactiveFormComponent implements OnInit {
   public myRegistrationForm!: FormGroup;
   public submit: boolean = false;
-  public favFruit:String = "Select your Favorite : ";
+  public favFruit: String = 'Select your Favorite : ';
   public formValue: String = '';
 
   public genders: Gender[] = [
@@ -26,12 +26,12 @@ export class ReactiveFormComponent implements OnInit {
   ];
 
   public fruitsArr: Fruit[] = [
-    { name: 'Pear', value: 'Pear' },
-    { name: 'Plum', value: 'Plum' },
-    { name: 'Kiwi', value: 'Kiwi' },
-    { name: 'Apple', value: 'Apple' },
-    { name: 'Lime', value: 'Lime' },
-    { name: 'Other', value: 'Other' },
+    { id: 11, name: 'Pear', value: 'Pear' },
+    { id: 12, name: 'Plum', value: 'Plum' },
+    { id: 13, name: 'Kiwi', value: 'Kiwi' },
+    { id: 14, name: 'Apple', value: 'Apple' },
+    { id: 15, name: 'Lime', value: 'Lime' },
+    { id: 7, name: 'Other', value: 'Other' },
   ];
 
   constructor() {}
@@ -61,12 +61,13 @@ export class ReactiveFormComponent implements OnInit {
     ) as FormArray;
     if (check.target.checked) {
       fruits.push(new FormControl(check.target.value));
+      console.log('fruits :>> ', fruits);
     } else {
       let i: number = 0;
       fruits.controls.forEach((item) => {
         if (item.value == check.target.value) {
           fruits.removeAt(i);
-          return ;
+          return;
         }
         i++;
       });

@@ -40,8 +40,8 @@
                 {{ favFruit }}
             </div>
             <div class="forms-group mt-2 text-white" *ngFor="let fruit of fruitsArr;let i=index">
-                <input type="checkbox" value="{{ fruit.value }}" formControlName="fruits" (change)="onCheckboxChange($event)" />&nbsp;
-                <label>{{fruit.name}}</label>
+                <input type="checkbox" value="{{ fruit.value }}" id="{{ fruit.id }}"  formArrayName="fruits" (change)="onCheckboxChange($event)" />&nbsp;
+                <label for="{{ fruit.id }}"> {{ fruit.name }} </label>
             </div>
             <p class="text-warning" *ngIf="this.myRegistrationForm.controls['fruits'].errors?.['required']">
                 Checkbox is required, select atleast one value.

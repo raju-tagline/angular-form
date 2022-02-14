@@ -4,6 +4,7 @@ export interface Gender {
 }
 
 export interface Fruit {
+    id:number;
     name:String;
     value:String;
 }
