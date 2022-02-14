@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'customPipe',
 })
 export class CustomPipePipe implements PipeTransform {
-  transform(value: any): void {
-    return value.substr(0, 10);
+  transform(value: any,trimStart:number,trimEnd:number) {
+    return value.substr(trimStart,trimEnd) + '...';
   }
 }
