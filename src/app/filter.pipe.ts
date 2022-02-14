@@ -5,8 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: any, searchTerm:any): any {
+    return value.filter( (search:any) => {
+      return search.product.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    })
   }
 
 }

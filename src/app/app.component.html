@@ -25,4 +25,31 @@
 <pre>Json pipe :-{{object | json }}</pre>
 <h5>Custom pipe</h5>
 <p>{{ details | customPipe : 2 :12 }}</p>
+<div class="row justify-content-center">
+  <div class="col-sm-8">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" [(ngModel)]="searchName" id="search" placeholder="Search by product"   />
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <td>S.no</td>
+          <td>Product</td>
+          <td>Price</td>
+          <td>Available</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of productArr | filter: searchName">
+          <td>{{ product.sno }}</td>
+          <td>{{ product.product }}</td>
+          <td>{{ product.price }}</td>
+          <td><h5><span class="badge text-black">{{ product.available }}</span></h5></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <router-outlet></router-outlet>
