@@ -10,4 +10,8 @@
 <p>Dollar symbol:- {{ 100 | currency:'USD':'symbol'  }}</p>
 <p>Dollar Code:- {{ 100 | currency:'USD':'code'  }}</p>
 <p>Dollar Narrow:- {{ 100 | currency:'USD':'symbol-narrow'  }}</p>
+<p>Upper case and lower case</p>
+<p>Original :-{{ details }} </p>
+<p>Upper Case :-{{ details | uppercase }}</p>
+<p>Lower Case :-{{ details | lowercase }}</p>
 <router-outlet></router-outlet>

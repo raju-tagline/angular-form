@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'forms';
   public currentTime = new Date();
+  details = `The built-in pipes are those which are already given to us by the Angular and are ready to use. `;
 }
