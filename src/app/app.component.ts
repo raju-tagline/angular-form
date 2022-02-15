@@ -1,3 +1,4 @@
+import { HttpDataService } from './http-data.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -52,5 +53,22 @@ export class AppComponent {
       price:'1,42,000',
       available:'Available'
     },
-  ]
+  ];
+  public userData = [{
+    userId:'',
+    id:'',
+    title:'',
+    completed:''
+  }]
+
+  constructor(private httpDataService:HttpDataService){
+    this.httpDataService.getData().subscribe((data)=>{
+      this.userData = data;
+    });
+    this.httpDataService.postUsers({ userId:102,id:202,title:'this is working',completed:'okk' }).subscribe((data) => {
+      console.log(data)
+    });
+  }
+
 }
+

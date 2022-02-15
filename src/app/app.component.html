@@ -28,7 +28,7 @@
 <div class="row justify-content-center">
   <div class="col-sm-8">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" [(ngModel)]="searchName" id="search" placeholder="Search by product"   />
+      <input type="text" class="form-control" [(ngModel)]="searchName" id="search" placeholder="Search by product" />
     </div>
   </div>
   <div class="col-sm-8">
@@ -46,8 +46,32 @@
           <td>{{ product.sno }}</td>
           <td>{{ product.product }}</td>
           <td>{{ product.price }}</td>
-          <td><h5><span class="badge text-black">{{ product.available }}</span></h5></td>
+          <td>
+            <h5><span class="badge text-black">{{ product.available }}</span></h5>
+          </td>
         </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- {userId: 1, id: 1, title: 'delectus aut autem', completed: false} -->
+
+<div class="row justify-content-center">
+  <div class="col-sm-8">
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <td>ID</td>
+          <td>Title</td>
+          <td>Completed</td>
+        </tr>
+      </thead>
+      <tr *ngFor="let user of userData">
+        <td>{{ user.id }}</td>
+        <td>{{ user.title }}</td>
+        <td> {{ user.completed }}</td>
+      </tr>
+      <tbody>
       </tbody>
     </table>
   </div>
