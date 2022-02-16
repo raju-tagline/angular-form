@@ -55,6 +55,14 @@
   </div>
 </div> -->
 <!-- {userId: 1, id: 1, title: 'delectus aut autem', completed: false} -->
+<div class="row justify-content-center">
+  <div class="col-sm-8">
+    <button class="btn btn-outline-primary col-sm-2 me-2 mb-3 mt-3" (click)="getData()">GET</button>
+    <button class="btn btn-outline-warning col-sm-2 me-2 mb-3 mt-3" (click)="postData()">POST</button>
+    <button class="btn btn-outline-danger col-sm-2 me-2 mb-3 mt-3" (click)="deleteData(222)">DELETE</button>
+    <button class="btn btn-outline-success col-sm-2 me-2 mb-3 mt-3" (click)="updateData()">UPDATE</button>
+  </div>
+</div>
 
 <div class="row justify-content-center">
   <div class="col-sm-8">
@@ -65,14 +73,18 @@
           <td>ID</td>
           <td>Title</td>
           <td>Completed</td>
+          <td>Delete</td>
         </tr>
       </thead>
       <tbody>
       <tr *ngFor="let user of userData">
         <td>{{ user.userId }}</td>
-        <td>{{ user.no }}</td>
+        <td>{{ user.id }}</td>
         <td>{{ user.title }}</td>
         <td>{{ user.completed }}</td>
+        <td>
+          <button class="btn btn-outline-danger" (click)="deleteData(user.id)">Delete</button>
+        </td>
       </tr>
       </tbody>
     </table>

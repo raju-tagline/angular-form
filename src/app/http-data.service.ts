@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -7,18 +8,21 @@ import { UserData } from './interface';
   providedIn: 'root',
 })
 export class HttpDataService {
-  public url: string = 'https://jsonplaceholder.typicode.com/todos';
-  public userDetail$ = new BehaviorSubject([]);
+  private url: string = environment.URL + '/todos';
+  public userDetail$:any = new BehaviorSubject([]);
 
-  public userD$() {
-    console.log('Behaviour subject :>> ');
+  public userD$(){
+    console.log('userD$ :>> ');
     return this.userDetail$.asObservable();
+    
   }
 
   constructor(public http: HttpClient) {}
 
+
   //Read data for http
   public getData(): Observable<UserData[]> {
+    // this.userDetail$.next(this.url);
     return this.http.get<UserData[]>(this.url);
   }
 
