@@ -1,3 +1,4 @@
+import { UserData } from './interface';
 import { HttpDataService } from './http-data.service';
 import { Component } from '@angular/core';
 
@@ -54,20 +55,26 @@ export class AppComponent {
       available:'Available'
     },
   ];
-  public userData = [{
-    userId:'',
-    id:'',
-    title:'',
-    completed:''
+  public userData:UserData[] = [{
+    userId:1,
+    no:1,
+    title:'asdf',
+    completed:'asdf'
   }]
 
   constructor(private httpDataService:HttpDataService){
     this.httpDataService.getData().subscribe((data)=>{
       this.userData = data;
     });
-    this.httpDataService.postUsers({ userId:102,id:202,title:'this is working',completed:'okk' }).subscribe((data) => {
-      console.log(data)
+    this.httpDataService.postUsers({ userId:102,no:202,title:'Post is working !',completed:'okk' }).subscribe((data1) => {
+      console.log('data1 :>> ', data1);
     });
+    this.httpDataService.updateUser(1,{userId:999,no:222,title:'put is working !',completed:'okk'}).subscribe((data2)=>{
+      console.log('data2 :>> ', data2);
+    });
+    this.httpDataService.deleteUser(101).subscribe((data3)=>{
+      console.log('data3 :>> ', data3);
+    })
   }
 
 }

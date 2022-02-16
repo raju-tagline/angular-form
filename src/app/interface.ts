@@ -1,6 +1,6 @@
-export interface userData {
+export interface UserData {
     userId:number,
-    id:number,
+    no:number,
     title:string,
     completed:string
 }
